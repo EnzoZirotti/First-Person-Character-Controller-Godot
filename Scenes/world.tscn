@@ -47,6 +47,7 @@ metallic_texture = SubResource("MeshTexture_144gl")
 roughness_texture = SubResource("CurveTexture_46t6l")
 
 [node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.205176, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1rgw4")
