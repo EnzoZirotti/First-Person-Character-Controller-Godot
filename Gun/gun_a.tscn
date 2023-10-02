@@ -8,7 +8,7 @@ var dropped = false
 func _ready():
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	if dropped == true:
 		apply_impulse(transform.basis.z, -transform.basis.z * 10)
 		dropped = false
@@ -22,7 +22,7 @@ size = Vector3(0.367835, 0.389925, 1.95908)
 [node name="Gun A" type="RigidBody3D"]
 script = SubResource("GDScript_4kxxq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Gun A" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("BoxMesh_gs7ty")
 

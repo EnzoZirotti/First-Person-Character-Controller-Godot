@@ -32,35 +32,37 @@ var weapon_to_drop
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _process(_delta):
-	if reach.is_colliding():
-		if reach.get_collider().get_name() == "Gun A":
-			weapon_to_spawn = gun_a.instantiate()
-		elif reach.get_collider().get_name() == "Gun B":
-			weapon_to_spawn = gun_b.instantiate()
-		else:
-			weapon_to_spawn = null
-	else:
-		weapon_to_spawn = null
+#func _process(_delta):
+#	if reach.is_colliding():
+#		if reach.get_collider().get_name() == "Gun A":
+#			weapon_to_spawn = gun_a.instantiate()
+#		elif reach.get_collider().get_name() == "Gun B":
+#			weapon_to_spawn = gun_b.instantiate()
+#		else:
+#			weapon_to_spawn = null
+#	else:
+#		weapon_to_spawn = null
+#
+#	if hand.get_child(0) != null:
+#		if hand.get_child(0).get_name() == "Gun A":
+#			weapon_to_drop = gun_a.instantiate()
+#		elif hand.get_child(0).get_name() == "Gun B":
+#			weapon_to_drop = gun_b.instantiate()
+#	else:
+#		weapon_to_drop = null
+#
+#	if Input.is_action_just_pressed("Interact"):
+#		if weapon_to_spawn != null:
+#			if hand.get_child(0) != null:
+#				get_parent().add_child(weapon_to_drop)
+#				weapon_to_drop.global_transform = hand.global_transform
+#				weapon_to_drop.dropped = true
+#				hand.get_child(0).queue_free()
+#			reach.get_collider().queue_free()
+#			hand.add_child(weapon_to_spawn)
+#			weapon_to_spawn.rotation = hand.rotation
 
-	if hand.get_child(0) != null:
-		if hand.get_child(0).get_name() == "Gun A":
-			weapon_to_drop = gun_a.instantiate()
-		elif hand.get_child(0).get_name() == "Gun B":
-			weapon_to_drop = gun_b.instantiate()
-	else:
-		weapon_to_drop = null
 
-	if Input.is_action_just_pressed("Interact"):
-		if weapon_to_spawn != null:
-			if hand.get_child(0) != null:
-				get_parent().add_child(weapon_to_drop)
-				weapon_to_drop.global_transform = hand.global_transform
-				weapon_to_drop.dropped = true
-				hand.get_child(0).queue_free()
-			reach.get_collider().queue_free()
-			hand.add_child(weapon_to_spawn)
-			weapon_to_spawn.rotation = hand.rotation
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -108,6 +110,15 @@ func _physics_process(_delta):
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, _delta * 8.0)
+	
+	
+	if Input.is_action_just_pressed("Interact"):
+		if reach.is_colliding():
+			if reach.get_collider().get_name() == "Gun A":
+				weapon_to_spawn = gun_a.instantiate()
+				hand.add_child(weapon_to_spawn)
+				weapon_to_spawn.rotation = hand.rotation
+
 
 	move_and_slide()
 
