@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0j71bppx23a2"]
+
+[sub_resource type="GDScript" id="GDScript_ytgf7"]
+script/source = "extends RigidBody3D
+
+
+var dropped = false
+
+func _ready():
+	pass
+	
+func _process(delta):
+	if dropped == true:
+		apply_impulse(transform.basis.z, -transform.basis.z * 10)
+		dropped = false
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqgm7"]
+albedo_color = Color(1, 0.176471, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uyetu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5fgk0"]
+size = Vector3(0.367835, 0.389925, 1.95908)
+
+[node name="Gun B" type="RigidBody3D"]
+script = SubResource("GDScript_ytgf7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_bqgm7")
+mesh = SubResource("BoxMesh_uyetu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5fgk0")
