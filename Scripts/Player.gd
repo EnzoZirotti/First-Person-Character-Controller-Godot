@@ -24,7 +24,7 @@ var weapon_to_drop
 @onready var head = $Head
 @onready var camera = $'Head/Camera3D'
 @onready var reach = $Head/Camera3D/Reach
-@onready var hand = $Head/Hand
+@onready var hand = $Head/Camera3D/Hand
 
 @onready var gun_a = preload("res://Gun/gun_a.tscn")
 @onready var gun_b = preload("res://Gun/gun_b.tscn")
